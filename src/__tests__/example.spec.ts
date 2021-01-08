@@ -1,6 +1,6 @@
 import sum from '../example';
 
 test('Dummy unit test', () => {
-  const actual = sum(1, 2);
+  const actual: number = sum(1, 2);
   expect(actual).toBe(3);
 });
