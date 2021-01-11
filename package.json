@@ -4,7 +4,10 @@
   "description": "Javascript client for the Cells API; See also: cells-api-py-client.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
-  "dependencies": {},
+  "dependencies": {
+    "husky": "^4.3.7",
+    "lint-staged": "^10.5.3"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
@@ -29,6 +32,17 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint -c .eslintrc.yml --ext .js,.ts src/",
     "lint:fix": "eslint -c .eslintrc.yml --ext .js,.ts --fix src/"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "prettier --write",
+      "eslint -c .eslintrc.yml"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "repository": {
     "type": "git",
