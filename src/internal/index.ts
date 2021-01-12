@@ -1,42 +1,29 @@
-interface InputTypes {
-  cell: string[];
-  organ: string[];
-  gene: string[];
-  cluster: string[];
-}
+import { CheckParametersTypes } from './internal.types';
+import { outputTypes, inputTypes, genomicModalities } from './internal.config';
 
 class Client {
-  constructor(baseUrl) {
+  baseUrl: string;
+
+  constructor(baseUrl: string) {
     // https://cells.dev.hubmapconsortium.org/api/'
-    this.basePath = baseUrl;
+    this.baseUrl = baseUrl;
   }
 
-  static checkParameters(
-    inputType: string,
-    outputType: string,
-    inputSet: string[],
-    genomicModality: string,
-    pValue: number = 0.05,
-  ): void {
-    const outputTypes: string[] = ['cell', 'organ', 'gene', 'cluster'];
-
+  static checkParameters({
+    inputType,
+    outputType,
+    // inputSet,
+    genomicModality,
+    pValue = 0.05,
+  }: CheckParametersTypes): void {
     if (!outputTypes.includes(outputType)) {
       throw new Error(`${outputType} not in ${outputTypes}`);
     }
-
-    const inputTypes: InputTypes = {
-      // Allowed input types vary depending on output type
-      cell: ['gene', 'organ', 'protein', 'dataset'],
-      organ: ['cell', 'gene'],
-      gene: ['organ', 'cluster'],
-      cluster: ['gene'],
-    };
 
     if (!inputTypes[outputType].includes(inputType)) {
       throw new Error(`${inputType} not in ${inputTypes[outputType]}`);
     }
 
-    const genomicModalities: string[] = ['rna', 'atac']; // Used for quantitative gene->cell queries
     if (inputType === 'gene' && outputType === 'cell' && !genomicModalities.includes(genomicModality)) {
       throw new Error(`${genomicModality} not in ${genomicModalities}`);
     }
