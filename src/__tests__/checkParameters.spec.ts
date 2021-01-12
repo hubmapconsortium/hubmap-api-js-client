@@ -1,10 +1,9 @@
 import Client from '../internal';
-import { InputTypes } from '../internal/internal.types';
 import { inputTypes, outputTypes, genomicModalities } from '../internal/internal.config';
 
 interface CheckParametersArguments {
   inputType: string;
-  outputType: keyof InputTypes;
+  outputType: string;
   // inputSet: string[];
   genomicModality: string;
   pValue?: number;
