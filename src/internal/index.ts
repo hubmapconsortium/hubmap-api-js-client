@@ -1,5 +1,5 @@
 import { CheckParametersTypes, RequestObjectParametersTypes, RequestObjectTypes } from './internal.types';
-import { outputTypes, inputTypes, genomicModalities } from './internal.config';
+import { HANDLE, outputTypes, inputTypes, genomicModalities } from './internal.config';
 
 class Client {
   baseUrl: string;
@@ -57,8 +57,24 @@ class Client {
     requestObject.logical_operator = 'and';
     return requestObject;
   }
+
+  async hubmapQuery({ inputType, outputType, inputSet, genomicModality, /* limit = 1000, */ pValue }) {
+    this.checkParameters(inputType, outputType, genomicModality, pValue);
+
+    const requestUrl = `${this.base_url + outputType}/`;
+
+    const requestObject = this.fillRequestObject(inputType, outputType, inputSet, genomicModality, pValue);
+
+    const response = await fetch(requestUrl, {
+      method: 'POST',
+      body: JSON.stringify(requestObject),
+    });
+
+    const { results } = response.json();
+    // Returns the key to be used in future computations
+    return results[0][HANDLE];
+  }
   /*
-  hubmapQuery() {}
 
   setIntersection() {}
 
