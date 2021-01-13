@@ -1,5 +1,7 @@
 import { InputTypes } from './internal.types';
 
+const HANDLE = 'query_pickle_hash';
+
 const outputTypes: string[] = ['cell', 'organ', 'gene', 'cluster'];
 
 const inputTypes: InputTypes = {
@@ -12,4 +14,4 @@ const inputTypes: InputTypes = {
 
 const genomicModalities: string[] = ['rna', 'atac']; // Used for quantitative gene->cell queries
 
-export { outputTypes, inputTypes, genomicModalities };
+export { HANDLE, outputTypes, inputTypes, genomicModalities };
