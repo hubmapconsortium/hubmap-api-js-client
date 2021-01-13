@@ -12,6 +12,14 @@ interface CheckParametersTypes {
   genomicModality?: string;
   pValue?: number;
 }
+
+interface RequestObjectParametersTypes {
+  inputType: string;
+  outputType: keyof InputTypes;
+  inputSet: string[];
+  genomicModality?: string;
+  pValue?: number;
+}
 interface RequestObjectTypes {
   /* eslint-disable camelcase */
   input_type: string;
@@ -22,4 +30,4 @@ interface RequestObjectTypes {
   /* eslint-enable camelcase */
 }
 
-export { InputTypes, CheckParametersTypes, RequestObjectTypes };
+export { InputTypes, CheckParametersTypes, RequestObjectParametersTypes, RequestObjectTypes };

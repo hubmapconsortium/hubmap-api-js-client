@@ -1,4 +1,4 @@
-import { CheckParametersTypes, RequestObjectTypes } from './internal.types';
+import { CheckParametersTypes, RequestObjectParametersTypes, RequestObjectTypes } from './internal.types';
 import { outputTypes, inputTypes, genomicModalities } from './internal.config';
 
 class Client {
@@ -43,7 +43,7 @@ class Client {
     inputSet,
     genomicModality,
     pValue,
-  }: CheckParametersTypes): RequestObjectTypes {
+  }: RequestObjectParametersTypes): RequestObjectTypes {
     const requestObject = { input_type: inputType, input_set: inputSet };
 
     if (['organ', 'gene'].includes(inputType) && outputType === 'gene') {
