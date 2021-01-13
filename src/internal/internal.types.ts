@@ -30,4 +30,8 @@ interface RequestObjectTypes {
   /* eslint-enable camelcase */
 }
 
-export { InputTypes, CheckParametersTypes, RequestObjectParametersTypes, RequestObjectTypes };
+interface HubmapQueryParameters extends RequestObjectParametersTypes {
+  limit?: number;
+}
+
+export { InputTypes, CheckParametersTypes, RequestObjectParametersTypes, RequestObjectTypes, HubmapQueryParameters };
